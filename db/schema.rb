@@ -17,14 +17,15 @@ ActiveRecord::Schema.define(version: 20160922175428) do
 
   create_table "bibs", force: :cascade do |t|
     t.integer  "race_id"
-    t.integer  "user_id"
+    t.integer  "seller_id"
     t.integer  "bought_price"
     t.integer  "selling_price"
     t.string   "sale_reason"
+    t.string   "status"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
     t.index ["race_id"], name: "index_bibs_on_race_id", using: :btree
-    t.index ["user_id"], name: "index_bibs_on_user_id", using: :btree
+    t.index ["seller_id"], name: "index_bibs_on_seller_id", using: :btree
   end
 
   create_table "favorite_races", force: :cascade do |t|
@@ -47,13 +48,12 @@ ActiveRecord::Schema.define(version: 20160922175428) do
   end
 
   create_table "orders", force: :cascade do |t|
-    t.integer  "user_id"
+    t.integer  "buyer_id"
     t.integer  "bib_id"
-    t.string   "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["bib_id"], name: "index_orders_on_bib_id", using: :btree
-    t.index ["user_id"], name: "index_orders_on_user_id", using: :btree
+    t.index ["buyer_id"], name: "index_orders_on_buyer_id", using: :btree
   end
 
   create_table "races", force: :cascade do |t|
@@ -104,13 +104,11 @@ ActiveRecord::Schema.define(version: 20160922175428) do
   end
 
   add_foreign_key "bibs", "races"
-  add_foreign_key "bibs", "users"
   add_foreign_key "favorite_races", "races"
   add_foreign_key "favorite_races", "users"
   add_foreign_key "messages", "orders"
   add_foreign_key "messages", "users"
   add_foreign_key "orders", "bibs"
-  add_foreign_key "orders", "users"
   add_foreign_key "reviews", "races"
   add_foreign_key "reviews", "users"
 end
