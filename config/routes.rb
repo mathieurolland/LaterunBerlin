@@ -1,7 +1,4 @@
 Rails.application.routes.draw do
-  get 'races/index'
-
-  get 'races/show'
 
   devise_for :users
   root to: 'pages#home'

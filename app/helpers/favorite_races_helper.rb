@@ -1,0 +1,2 @@
+module FavoriteRacesHelper
+end
